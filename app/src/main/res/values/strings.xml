@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Runner Tracker</string>
+    <string name="calories">CALORIES</string>
+    <string name="avgspeed">AVGSPEED</string>
+    <string name="distance">DISTANCE</string>
+    <string name="time">TIME</string>
+    <string name="date">DATE</string>
+    <string name="running_tracker">Running Tracker</string>
 </resources>
