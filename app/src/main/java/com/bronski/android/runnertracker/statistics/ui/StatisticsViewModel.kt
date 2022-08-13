@@ -7,6 +7,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StatisticsViewModel @Inject constructor(
-    private val mainRepository: MainRepositoryImpl
+    private val mainRepository: MainRepositoryImpl,
 ) : ViewModel() {
 }

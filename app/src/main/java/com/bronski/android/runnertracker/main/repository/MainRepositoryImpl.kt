@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class MainRepositoryImpl @Inject constructor(
     private val runDao: RunDao,
-): IMainRepository {
+) : IMainRepository {
 
     override suspend fun insertRun(runEntity: RunEntity) = runDao.insertRun(runEntity)
 
@@ -28,5 +28,6 @@ class MainRepositoryImpl @Inject constructor(
 
     override fun getAllRunsSortedByDistanceInMeters() = runDao.getAllRunsSortedByDistanceInMeters()
 
-    override fun getAllRunsSortedByAverageSpeedInKmh() = runDao.getAllRunsSortedByAverageSpeedInKmh()
+    override fun getAllRunsSortedByAverageSpeedInKmh() =
+        runDao.getAllRunsSortedByAverageSpeedInKmh()
 }

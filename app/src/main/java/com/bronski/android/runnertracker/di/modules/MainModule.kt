@@ -15,7 +15,7 @@ class MainModule {
 
     @Provides
     fun provideRunningDataBase(
-        @ApplicationContext appContext: Context
+        @ApplicationContext appContext: Context,
     ) = Room.databaseBuilder(
         appContext,
         RunningDatabase::class.java,
