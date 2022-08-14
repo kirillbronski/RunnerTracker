@@ -28,7 +28,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/running_tracker"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_30"
+                android:textSize="@dimen/text_24"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
