@@ -1,9 +1,13 @@
 package com.bronski.android.runnertracker.tracking.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.bronski.android.runnertracker.core.services.TrackingService
 import com.bronski.android.runnertracker.core.ui.BaseFragment
+import com.bronski.android.runnertracker.core.utils.Constants
+import com.bronski.android.runnertracker.core.utils.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.bronski.android.runnertracker.databinding.FragmentTrackingBinding
 import com.google.android.gms.maps.GoogleMap
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +24,9 @@ class TrackingFragment : BaseFragment<FragmentTrackingBinding>() {
         binding.mapView.onCreate(savedInstanceState)
         binding.mapView.getMapAsync {
             googleMap = it
+        }
+        binding.runButton.setOnClickListener {
+            sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
         }
     }
 
@@ -52,6 +59,12 @@ class TrackingFragment : BaseFragment<FragmentTrackingBinding>() {
         super.onSaveInstanceState(outState)
         binding.mapView.onSaveInstanceState(outState)
     }
+
+    private fun sendCommandToService(action: String) =
+        Intent(requireContext(), TrackingService::class.java).also {
+            it.action = action
+            requireContext().startService(it)
+        }
 
     override fun getViewBinding() = FragmentTrackingBinding.inflate(layoutInflater)
 

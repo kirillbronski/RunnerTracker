@@ -19,13 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RunnerTracker"
         tools:targetApi="31">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
-
         <activity
-            android:name=".MainActivity"
+            android:name=".core.ui.MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
@@ -37,6 +35,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".core.services.TrackingService"
+            android:foregroundServiceType="location"/>
     </application>
-
 </manifest>
