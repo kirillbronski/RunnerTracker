@@ -1,5 +1,6 @@
 package com.bronski.android.runnertracker.core.services
 
+import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -10,21 +11,28 @@ import android.content.Context
 import android.content.Intent
 import android.location.Location
 import android.os.Build
+import android.os.Looper
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.bronski.android.runnertracker.R
 import com.bronski.android.runnertracker.core.ui.MainActivity
 import com.bronski.android.runnertracker.core.utils.Constants.ACTION_PAUSE_SERVICE
 import com.bronski.android.runnertracker.core.utils.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 import com.bronski.android.runnertracker.core.utils.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.bronski.android.runnertracker.core.utils.Constants.ACTION_STOP_SERVICE
+import com.bronski.android.runnertracker.core.utils.Constants.FASTEST_LOCATION_INTERVAL
+import com.bronski.android.runnertracker.core.utils.Constants.LOCATION_UPDATE_INTERVAL
 import com.bronski.android.runnertracker.core.utils.Constants.NOTIFICATION_CHANNEL_ID
 import com.bronski.android.runnertracker.core.utils.Constants.NOTIFICATION_CHANNEL_NAME
 import com.bronski.android.runnertracker.core.utils.Constants.NOTIFICATION_ID
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.maps.model.LatLng
 import timber.log.Timber
 
@@ -34,6 +42,7 @@ typealias SeveralPolyline = MutableList<Polyline>
 class TrackingService : LifecycleService() {
 
     private var isFirstRun = true
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(result: LocationResult) {
@@ -42,6 +51,7 @@ class TrackingService : LifecycleService() {
                 result.locations.let {
                     for (location in it) {
                         addPathPoint(location)
+                        Timber.d("New Location: ${location.latitude}, ${location.longitude}")
                     }
                 }
             }
@@ -51,6 +61,17 @@ class TrackingService : LifecycleService() {
     companion object {
         val isTracking = MutableLiveData<Boolean>()
         val pathPoints = MutableLiveData<SeveralPolyline>()
+    }
+
+    @SuppressLint("VisibleForTests")
+    override fun onCreate() {
+        super.onCreate()
+        postInitialValues()
+        fusedLocationProviderClient = FusedLocationProviderClient(this)
+
+        isTracking.observe(this, Observer {
+            updateLocationTracking(it)
+        })
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
@@ -77,9 +98,21 @@ class TrackingService : LifecycleService() {
         return super.onStartCommand(intent, flags, startId)
     }
 
+    @SuppressLint("MissingPermission")
     private fun updateLocationTracking(isTracking: Boolean) {
         if (isTracking) {
-            // TODO:
+            val locationRequest = LocationRequest.create().apply {
+                interval = LOCATION_UPDATE_INTERVAL
+                fastestInterval = FASTEST_LOCATION_INTERVAL
+                priority = PRIORITY_HIGH_ACCURACY
+            }
+            fusedLocationProviderClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                Looper.getMainLooper()
+            )
+        } else {
+            fusedLocationProviderClient.removeLocationUpdates(locationCallback)
         }
     }
 
@@ -107,6 +140,7 @@ class TrackingService : LifecycleService() {
     @RequiresApi(Build.VERSION_CODES.S)
     private fun startForegroundService() {
         addEmptyPolyline()
+        isTracking.postValue(true)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel(getNotificationManager())
         }
