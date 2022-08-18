@@ -12,6 +12,7 @@ import com.bronski.android.runnertracker.core.utils.Constants.ACTION_START_OR_RE
 import com.bronski.android.runnertracker.core.utils.Constants.MAP_ZOOM
 import com.bronski.android.runnertracker.core.utils.Constants.POLYLINE_COLOR
 import com.bronski.android.runnertracker.core.utils.Constants.POLYLINE_WIDTH
+import com.bronski.android.runnertracker.core.utils.TrackingUtility
 import com.bronski.android.runnertracker.databinding.FragmentTrackingBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -25,6 +26,7 @@ class TrackingFragment : BaseFragment<FragmentTrackingBinding>() {
 
     private var isTracking = false
     private var pathPoints = mutableListOf<Polyline>()
+    private var currentTimeInMillis = 0L
 
     private var googleMap: GoogleMap? = null
 
@@ -80,6 +82,12 @@ class TrackingFragment : BaseFragment<FragmentTrackingBinding>() {
             pathPoints = it
             addLatestPolyline()
             moveCameraToUser()
+        }
+
+        TrackingService.timeRunInMillis.observe(viewLifecycleOwner) {
+            currentTimeInMillis = it
+            val formattedTime = TrackingUtility.getFormattedStopWatchTime(currentTimeInMillis, true)
+            binding.timerTextView.text = formattedTime
         }
     }
 
