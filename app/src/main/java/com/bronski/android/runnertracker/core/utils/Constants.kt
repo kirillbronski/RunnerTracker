@@ -1,5 +1,7 @@
 package com.bronski.android.runnertracker.core.utils
 
+import android.graphics.Color
+
 object Constants {
     const val ACTION_START_OR_RESUME_SERVICE = "ACTION_START_OR_RESUME_SERVICE"
     const val ACTION_PAUSE_SERVICE = "ACTION_PAUSE_SERVICE"
@@ -10,4 +12,7 @@ object Constants {
     const val NOTIFICATION_CHANNEL_NAME = "Tracking"
     const val LOCATION_UPDATE_INTERVAL = 5000L
     const val FASTEST_LOCATION_INTERVAL = 2000L
+    const val POLYLINE_COLOR = Color.RED
+    const val POLYLINE_WIDTH = 8f
+    const val MAP_ZOOM = 15f
 }
