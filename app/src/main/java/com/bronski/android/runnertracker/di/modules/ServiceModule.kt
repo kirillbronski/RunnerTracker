@@ -68,13 +68,4 @@ object ServiceModule {
         .setContentTitle("Running App")
         .setContentText("00:00:00")
         .setContentIntent(pendingIntent)
-        .build()
-
-//    @Provides
-//    @ServiceScoped
-//    fun provideTrackingService(
-//        fusedLocationProviderClient: FusedLocationProviderClient,
-//        notification: Notification,
-//        notificationManager: NotificationManager
-//    ) = TrackingService(fusedLocationProviderClient, notification, notificationManager)
 }
