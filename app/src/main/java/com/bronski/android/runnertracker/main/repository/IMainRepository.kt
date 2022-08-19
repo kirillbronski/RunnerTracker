@@ -5,8 +5,6 @@ import com.bronski.android.runnertracker.core.data.room.RunEntity
 
 interface IMainRepository {
 
-    suspend fun insertRun(runEntity: RunEntity)
-
     suspend fun deleteRun(runEntity: RunEntity)
 
     fun getTotalTimeInMillis(): LiveData<Long>

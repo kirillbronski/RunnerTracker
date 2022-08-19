@@ -1,5 +1,7 @@
 package com.bronski.android.runnertracker.core.utils
 
+import android.location.Location
+import com.bronski.android.runnertracker.core.services.Polyline
 import com.bronski.android.runnertracker.core.utils.Constants.TEN
 import java.util.concurrent.TimeUnit
 
@@ -23,6 +25,24 @@ object TrackingUtility {
                 "${if (minutes < TEN) "0" else ""}$minutes:" +
                 "${if (seconds < TEN) "0" else ""}$seconds:" +
                 "${if (milliseconds < TEN) "0" else ""}$milliseconds"
+    }
+
+    fun calculatePolylineLength(polyline: Polyline): Float {
+        var distance = 0f
+        for (i in 0..polyline.size - 2) {
+            val position1 = polyline[i]
+            val position2 = polyline[i + 1]
+            val result = FloatArray(1)
+            Location.distanceBetween(
+                position1.latitude,
+                position1.longitude,
+                position2.latitude,
+                position2.longitude,
+                result
+            )
+            distance += result[0]
+        }
+        return distance
     }
 
 }

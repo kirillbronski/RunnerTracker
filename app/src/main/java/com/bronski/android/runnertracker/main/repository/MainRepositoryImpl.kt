@@ -8,8 +8,6 @@ class MainRepositoryImpl @Inject constructor(
     private val runDao: RunDao,
 ) : IMainRepository {
 
-    override suspend fun insertRun(runEntity: RunEntity) = runDao.insertRun(runEntity)
-
     override suspend fun deleteRun(runEntity: RunEntity) = runDao.deleteRun(runEntity)
 
     override fun getTotalTimeInMillis() = runDao.getTotalTimeInMillis()
@@ -30,4 +28,5 @@ class MainRepositoryImpl @Inject constructor(
 
     override fun getAllRunsSortedByAverageSpeedInKmh() =
         runDao.getAllRunsSortedByAverageSpeedInKmh()
+
 }
