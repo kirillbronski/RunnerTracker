@@ -13,6 +13,7 @@ import dagger.hilt.components.SingletonComponent
 class RepoModule {
 
     @Provides
-    fun providesTrackingRepository(runDao: RunDao): ITrackingRepository = TrackingRepositoryImpl(runDao)
+    fun providesTrackingRepository(runDao: RunDao): ITrackingRepository =
+        TrackingRepositoryImpl(runDao)
 
 }

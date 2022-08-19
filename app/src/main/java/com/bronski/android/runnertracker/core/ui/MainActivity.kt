@@ -6,7 +6,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -67,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToTrackingFragmentIfNeeded(intent: Intent) {
-        if (intent.action == ACTION_SHOW_TRACKING_FRAGMENT){
+        if (intent.action == ACTION_SHOW_TRACKING_FRAGMENT) {
             getNavController().navigate(R.id.action_global_trackingFragment)
         }
     }

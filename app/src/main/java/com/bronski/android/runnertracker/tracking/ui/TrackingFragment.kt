@@ -190,8 +190,8 @@ class TrackingFragment : BaseFragment<FragmentTrackingBinding>() {
 
     private fun zoomToSeeWholeTrack() {
         val bounds = LatLngBounds.Builder()
-        for(polyline in pathPoints) {
-            for(pos in polyline) {
+        for (polyline in pathPoints) {
+            for (pos in polyline) {
                 bounds.include(pos)
             }
         }
