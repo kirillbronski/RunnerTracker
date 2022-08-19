@@ -7,12 +7,17 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bronski.android.runnertracker.R
+import com.bronski.android.runnertracker.core.data.room.RunEntity
 import com.bronski.android.runnertracker.core.ui.BaseFragment
+import com.bronski.android.runnertracker.core.utils.RecyclerItemListener
 import com.bronski.android.runnertracker.databinding.FragmentRunBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -22,19 +27,35 @@ class RunFragment : BaseFragment<FragmentRunBinding>() {
 
     private val viewModel by viewModels<RunViewModel>()
 
+    private val recyclerItemListener = object : RecyclerItemListener {
+        override fun onItemClick(itemRun: RunEntity) {
+            Toast.makeText(requireContext(), "${itemRun.id}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private val runAdapter = RunAdapter(listener = recyclerItemListener)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requestPermission()
+        setupAdapter()
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
+        }
+        viewModel.runsSortedByDate.observe(viewLifecycleOwner) {
+            runAdapter.submitList(it)
+        }
+    }
+
+    private fun setupAdapter() = with(binding) {
+        runsRecyclerView.apply {
+            adapter = runAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            (itemAnimator as? DefaultItemAnimator)?.supportsChangeAnimations = false
         }
     }
 
     private fun onGotPermissionsResult(grantResults: Map<String, Boolean>) {
-        grantResults.forEach {
-            Timber.d(it.toString())
-        }
         if (grantResults.entries.all { it.value }) {
             return
         } else {
@@ -52,7 +73,8 @@ class RunFragment : BaseFragment<FragmentRunBinding>() {
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
 //                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-            ))
+            )
+        )
     }
 
     private fun askUserForOpenInAppSettings() {

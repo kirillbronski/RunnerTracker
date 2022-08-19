@@ -1,14 +1,23 @@
 package com.bronski.android.runnertracker.run.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bronski.android.runnertracker.R
 import com.bronski.android.runnertracker.core.data.room.RunEntity
+import com.bronski.android.runnertracker.core.utils.RecyclerItemListener
+import com.bronski.android.runnertracker.core.utils.TrackingUtility
 import com.bronski.android.runnertracker.databinding.ItemRunBinding
+import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
+import java.util.*
 
-class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
+class RunAdapter(
+    private val listener: RecyclerItemListener
+) : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
 
     private val runsListDiffer = AsyncListDiffer(this, DIFF_CALLBACK)
 
@@ -42,8 +51,29 @@ class RunAdapter : RecyclerView.Adapter<RunAdapter.RunViewHolder>() {
     inner class RunViewHolder(
         val binding: ItemRunBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(itemRun: RunEntity) = with(binding) {
 
+            val calendar = Calendar.getInstance().apply {
+                timeInMillis = itemRun.timestamp
+            }
+            val dateFormat = SimpleDateFormat("dd:MM:yy", Locale.ROOT)
+
+            dateTextView.text = dateFormat.format(calendar.time)
+            avgSpeedTextView.text = "${itemRun.averageSpeedInKmh}km/h"
+            distanceTextView.text = "${itemRun.distanceInMeters / 1000f}km"
+            timeTextView.text = TrackingUtility.getFormattedStopWatchTime(itemRun.timeInMillis)
+            caloriesTextView.text = "${itemRun.caloriesBurned}kcal"
+
+            Glide.with(runImageView.context)
+                .load(itemRun.image)
+//                .placeholder(R.drawable.ic_baseline_error_outline_24)
+//                .error(R.drawable.ic_baseline_error_outline_24)
+                .into(runImageView)
+
+            itemView.setOnClickListener {
+                listener.onItemClick(itemRun)
+            }
         }
 
     }

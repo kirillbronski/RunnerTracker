@@ -15,7 +15,7 @@ interface IMainRepository {
 
     fun getTotalAverageSpeedInKmh(): LiveData<Float>
 
-    fun getAllRunsSortedByDate(): LiveData<List<RunEntity>>
+
 
     fun getAllRunsSortedByTimeInMillis(): LiveData<List<RunEntity>>
 
