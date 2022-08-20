@@ -1,8 +1,7 @@
 package com.bronski.android.runnertracker.run.ui.repository
 
-import androidx.lifecycle.LiveData
-import com.bronski.android.runnertracker.core.data.room.RunEntity
+import com.bronski.android.runnertracker.core.utils.BaseResult
 
 interface IRunRepository {
-    fun getAllRunsSortedByDate(): LiveData<List<RunEntity>>
+    suspend fun getAllRunsSortedByDate(): BaseResult
 }

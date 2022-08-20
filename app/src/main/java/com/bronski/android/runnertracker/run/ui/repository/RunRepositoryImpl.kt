@@ -1,13 +1,22 @@
 package com.bronski.android.runnertracker.run.ui.repository
 
-import androidx.lifecycle.LiveData
 import com.bronski.android.runnertracker.core.data.room.RunDao
-import com.bronski.android.runnertracker.core.data.room.RunEntity
+import com.bronski.android.runnertracker.core.utils.BaseResult
 import javax.inject.Inject
 
 class RunRepositoryImpl @Inject constructor(
-    private val runDao: RunDao
+    private val runDao: RunDao,
 ) : IRunRepository {
 
-    override fun getAllRunsSortedByDate() = runDao.getAllRunsSortedByDate()
+    override suspend fun getAllRunsSortedByDate(): BaseResult =
+        runCatching {
+            runDao.getAllRunsSortedByDate()
+        }.fold(
+            onSuccess = {
+                BaseResult.Success(it)
+            },
+            onFailure = {
+                BaseResult.Error(it.message)
+            }
+        )
 }

@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +21,7 @@ import com.bronski.android.runnertracker.core.ui.BaseFragment
 import com.bronski.android.runnertracker.core.utils.RecyclerItemListener
 import com.bronski.android.runnertracker.databinding.FragmentRunBinding
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class RunFragment : BaseFragment<FragmentRunBinding>() {
@@ -42,9 +43,19 @@ class RunFragment : BaseFragment<FragmentRunBinding>() {
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
         }
+//        lifecycleScope.launchWhenStarted {
+//            viewModel.runsSortedByDate.collectLatest {
+//                runAdapter.submitList(it)
+//            }
+//        }
         viewModel.runsSortedByDate.observe(viewLifecycleOwner) {
             runAdapter.submitList(it)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getAllRunsSortedByDate()
     }
 
     private fun setupAdapter() = with(binding) {
