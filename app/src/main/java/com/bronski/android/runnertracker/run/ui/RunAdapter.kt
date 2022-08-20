@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bronski.android.runnertracker.R
 import com.bronski.android.runnertracker.core.data.room.RunEntity
 import com.bronski.android.runnertracker.core.utils.RecyclerItemListener
 import com.bronski.android.runnertracker.core.utils.TrackingUtility
@@ -57,7 +56,7 @@ class RunAdapter(
             val calendar = Calendar.getInstance().apply {
                 timeInMillis = itemRun.timestamp
             }
-            val dateFormat = SimpleDateFormat("dd:MM:yy", Locale.ROOT)
+            val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.ROOT)
 
             dateTextView.text = dateFormat.format(calendar.time)
             avgSpeedTextView.text = "${itemRun.averageSpeedInKmh}km/h"
@@ -67,8 +66,6 @@ class RunAdapter(
 
             Glide.with(runImageView.context)
                 .load(itemRun.image)
-//                .placeholder(R.drawable.ic_baseline_error_outline_24)
-//                .error(R.drawable.ic_baseline_error_outline_24)
                 .into(runImageView)
 
             itemView.setOnClickListener {

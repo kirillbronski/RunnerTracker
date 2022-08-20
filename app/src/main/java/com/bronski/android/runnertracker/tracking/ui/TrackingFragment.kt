@@ -216,12 +216,14 @@ class TrackingFragment : BaseFragment<FragmentTrackingBinding>() {
                 round((distanceInMeters / 1000f) / (currentTimeInMillis / 1000f / 60 / 60) * 10) / 10f
             val dateTimestamp = Calendar.getInstance().timeInMillis
             val caloriesBurned = ((distanceInMeters / 1000f) * weight).toInt()
-            val runEntity = RunEntity(bmp,
+            val runEntity = RunEntity(
+                bmp,
                 dateTimestamp,
                 avgSpeed,
                 distanceInMeters,
                 currentTimeInMillis,
-                caloriesBurned)
+                caloriesBurned
+            )
 
             viewModel.insertRun(runEntity)
             Snackbar.make(

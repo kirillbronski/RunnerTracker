@@ -7,11 +7,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,9 +19,9 @@ import com.bronski.android.runnertracker.R
 import com.bronski.android.runnertracker.core.data.room.RunEntity
 import com.bronski.android.runnertracker.core.ui.BaseFragment
 import com.bronski.android.runnertracker.core.utils.RecyclerItemListener
+import com.bronski.android.runnertracker.core.utils.SortType
 import com.bronski.android.runnertracker.databinding.FragmentRunBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class RunFragment : BaseFragment<FragmentRunBinding>() {
@@ -40,22 +40,56 @@ class RunFragment : BaseFragment<FragmentRunBinding>() {
         super.onViewCreated(view, savedInstanceState)
         requestPermission()
         setupAdapter()
+        observeToRunList()
+        setupSortType()
+        setupSpinnerFilter()
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
+            navigateToTrackingFragment()
         }
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.runsSortedByDate.collectLatest {
-//                runAdapter.submitList(it)
-//            }
-//        }
-        viewModel.runsSortedByDate.observe(viewLifecycleOwner) {
-            runAdapter.submitList(it)
+
+
+    }
+
+    private fun navigateToTrackingFragment() {
+        findNavController().navigate(R.id.action_runFragment_to_trackingFragment)
+    }
+
+    private fun setupSpinnerFilter() {
+        binding.filterSpinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                adapterView: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when (position) {
+                    0 -> viewModel.sortRuns(SortType.DATE)
+                    1 -> viewModel.sortRuns(SortType.RUNNING_TIME)
+                    2 -> viewModel.sortRuns(SortType.DISTANCE)
+                    3 -> viewModel.sortRuns(SortType.AVG_SPEED)
+                    4 -> viewModel.sortRuns(SortType.CALORIES_BURNED)
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.getAllRunsSortedByDate()
+    private fun setupSortType() {
+        when (viewModel.sortType) {
+            SortType.DATE -> binding.filterSpinner.setSelection(0)
+            SortType.RUNNING_TIME -> binding.filterSpinner.setSelection(1)
+            SortType.DISTANCE -> binding.filterSpinner.setSelection(2)
+            SortType.AVG_SPEED -> binding.filterSpinner.setSelection(3)
+            SortType.CALORIES_BURNED -> binding.filterSpinner.setSelection(4)
+        }
+    }
+
+    private fun observeToRunList() {
+        viewModel.runs.observe(viewLifecycleOwner) {
+            runAdapter.submitList(it)
+        }
     }
 
     private fun setupAdapter() = with(binding) {
@@ -82,8 +116,7 @@ class RunFragment : BaseFragment<FragmentRunBinding>() {
         permissionsRequestLauncher.launch(
             arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-//                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
             )
         )
     }

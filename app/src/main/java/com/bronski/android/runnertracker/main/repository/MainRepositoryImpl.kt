@@ -18,15 +18,4 @@ class MainRepositoryImpl @Inject constructor(
 
     override fun getTotalAverageSpeedInKmh() = runDao.getTotalAverageSpeedInKmh()
 
-
-
-    override fun getAllRunsSortedByTimeInMillis() = runDao.getAllRunsSortedByTimeInMillis()
-
-    override fun getAllRunsSortedByCaloriesBurned() = runDao.getAllRunsSortedByCaloriesBurned()
-
-    override fun getAllRunsSortedByDistanceInMeters() = runDao.getAllRunsSortedByDistanceInMeters()
-
-    override fun getAllRunsSortedByAverageSpeedInKmh() =
-        runDao.getAllRunsSortedByAverageSpeedInKmh()
-
 }
