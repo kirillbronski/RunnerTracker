@@ -33,6 +33,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 import kotlin.math.round
 
 @AndroidEntryPoint
@@ -44,7 +45,9 @@ class TrackingFragment : BaseFragment<FragmentTrackingBinding>() {
     private var pathPoints = mutableListOf<Polyline>()
     private var currentTimeInMillis = TIME_DEFAULT_VALUE
     private var toolbarMenu: Menu? = null
-    private val weight = 80f
+
+    @set:Inject
+    var weight = 80f
 
     private var googleMap: GoogleMap? = null
 
