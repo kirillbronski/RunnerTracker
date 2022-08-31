@@ -10,12 +10,4 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun deleteRun(runEntity: RunEntity) = runDao.deleteRun(runEntity)
 
-    override fun getTotalTimeInMillis() = runDao.getTotalTimeInMillis()
-
-    override fun getTotalCaloriesBurned() = runDao.getTotalCaloriesBurned()
-
-    override fun getTotalDistanceInMeters() = runDao.getTotalDistanceInMeters()
-
-    override fun getTotalAverageSpeedInKmh() = runDao.getTotalAverageSpeedInKmh()
-
 }

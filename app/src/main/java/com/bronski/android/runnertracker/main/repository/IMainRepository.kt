@@ -7,12 +7,6 @@ interface IMainRepository {
 
     suspend fun deleteRun(runEntity: RunEntity)
 
-    fun getTotalTimeInMillis(): LiveData<Long>
 
-    fun getTotalCaloriesBurned(): LiveData<Int>
-
-    fun getTotalDistanceInMeters(): LiveData<Int>
-
-    fun getTotalAverageSpeedInKmh(): LiveData<Float>
 
 }
