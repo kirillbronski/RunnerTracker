@@ -155,7 +155,7 @@ class TrackingFragment : BaseFragment<FragmentTrackingBinding>() {
         TrackingService.timeRunInMillis.observe(viewLifecycleOwner) {
             currentTimeInMillis = it
             val formattedTime = TrackingUtility.getFormattedStopWatchTime(currentTimeInMillis, true)
-            binding.timerTextView.text = formattedTime
+            binding.timerTextView?.text = formattedTime
         }
     }
 
