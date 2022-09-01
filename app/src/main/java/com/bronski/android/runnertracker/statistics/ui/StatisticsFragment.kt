@@ -96,7 +96,8 @@ class StatisticsFragment : BaseFragment<FragmentStatisticsBinding>() {
                     color = ContextCompat.getColor(requireContext(), R.color.color_accent)
                 }
                 binding.barChart.data = BarData(barDataSet)
-                binding.barChart.marker = CustomMarkerView(it.reversed(), requireContext(), R.layout.marker_view)
+                binding.barChart.marker =
+                    CustomMarkerView(it.reversed(), requireContext(), R.layout.marker_view)
                 binding.barChart.invalidate()
             }
         }

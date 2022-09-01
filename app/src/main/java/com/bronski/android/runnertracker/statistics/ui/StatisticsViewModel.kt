@@ -2,8 +2,6 @@ package com.bronski.android.runnertracker.statistics.ui
 
 import androidx.lifecycle.ViewModel
 import com.bronski.android.runnertracker.statistics.repository.IStatisticsRepository
-import com.bronski.android.runnertracker.statistics.repository.StatisticsRepositoryImpl
-import com.bronski.android.runnertracker.tracking.repository.TrackingRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
