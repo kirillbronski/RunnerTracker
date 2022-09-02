@@ -1,5 +1,6 @@
 package com.bronski.android.runnertracker.tracking.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -19,6 +20,7 @@ import com.bronski.android.runnertracker.core.ui.BaseFragment
 import com.bronski.android.runnertracker.core.utils.Constants.ACTION_PAUSE_SERVICE
 import com.bronski.android.runnertracker.core.utils.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.bronski.android.runnertracker.core.utils.Constants.ACTION_STOP_SERVICE
+import com.bronski.android.runnertracker.core.utils.Constants.CANCEL_TRACKING_DIALOG_TAG
 import com.bronski.android.runnertracker.core.utils.Constants.MAP_ZOOM
 import com.bronski.android.runnertracker.core.utils.Constants.POLYLINE_COLOR
 import com.bronski.android.runnertracker.core.utils.Constants.POLYLINE_WIDTH
@@ -55,6 +57,13 @@ class TrackingFragment : BaseFragment<FragmentTrackingBinding>() {
         super.onViewCreated(view, savedInstanceState)
         setupOptionsMenu()
         binding.mapView.onCreate(savedInstanceState)
+        if (savedInstanceState != null){
+            val cancelTrackingDialog = parentFragmentManager.findFragmentByTag(
+                CANCEL_TRACKING_DIALOG_TAG) as CancelTrackingDialog?
+            cancelTrackingDialog?.setYesListener {
+                stopRun()
+            }
+        }
         binding.mapView.getMapAsync {
             googleMap = it
             addAllPolyline()
@@ -122,21 +131,18 @@ class TrackingFragment : BaseFragment<FragmentTrackingBinding>() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    private fun showCancelTrackingDialog() =
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Cancel the run?")
-            .setMessage("Are you sure to cancel the current run and delete all it's data?")
-            .setIcon(R.drawable.ic_baseline_delete_24)
-            .setPositiveButton("Yes") { _, _ ->
+    private fun showCancelTrackingDialog() {
+        CancelTrackingDialog().apply {
+            setYesListener {
                 stopRun()
             }
-            .setNegativeButton("No") { dialogInterface, _ ->
-                dialogInterface.cancel()
-            }
-            .create()
-            .show()
+        }.show(parentFragmentManager, CANCEL_TRACKING_DIALOG_TAG)
+    }
 
+
+    @SuppressLint("SetTextI18n")
     private fun stopRun() {
+        binding.timerTextView?.text = "00:00:00:00"
         sendCommandToService(ACTION_STOP_SERVICE)
         findNavController().navigate(R.id.action_trackingFragment_to_runFragment)
     }
@@ -170,10 +176,10 @@ class TrackingFragment : BaseFragment<FragmentTrackingBinding>() {
 
     private fun updateTracking(isTracking: Boolean) {
         this.isTracking = isTracking
-        if (!isTracking) {
+        if (!isTracking && currentTimeInMillis > 0L) {
             binding.runButton.text = getString(R.string.start_text)
             binding.finishButton.visibility = View.VISIBLE
-        } else {
+        } else if(isTracking) {
             binding.runButton.text = getString(R.string.stop_text)
             toolbarMenu?.getItem(0)?.isVisible = true
             binding.finishButton.visibility = View.GONE

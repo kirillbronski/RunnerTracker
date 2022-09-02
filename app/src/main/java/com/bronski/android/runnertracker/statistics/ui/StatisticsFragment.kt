@@ -34,18 +34,15 @@ class StatisticsFragment : BaseFragment<FragmentStatisticsBinding>() {
         binding.barChart.xAxis.apply {
             position = XAxis.XAxisPosition.BOTTOM
             setDrawLabels(false)
-            axisLineColor = Color.WHITE
-            textColor = Color.WHITE
+
             setDrawGridLines(false)
         }
         binding.barChart.axisLeft.apply {
-            axisLineColor = Color.WHITE
-            textColor = Color.WHITE
+
             setDrawGridLines(false)
         }
         binding.barChart.axisRight.apply {
-            axisLineColor = Color.WHITE
-            textColor = Color.WHITE
+
             setDrawGridLines(false)
         }
         binding.barChart.apply {

@@ -61,9 +61,9 @@ class SetupFragment : BaseFragment<FragmentSetupBinding>() {
             .putFloat(KEY_WEIGHT, weight.toFloat())
             .putBoolean(KEY_FIRST_TIME_TOGGLE, false)
             .apply()
-        val toolbarText = "Let's go $name"
-        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
-        toolbar.title = toolbarText
+//        val toolbarText = "Let's go $name"
+//        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
+//        toolbar.title = toolbarText
         return true
     }
 

@@ -53,9 +53,9 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
             .putString(KEY_NAME, name)
             .putFloat(KEY_WEIGHT, weight.toFloat())
             .apply()
-        val toolbarText = "Let's go $name"
-        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
-        toolbar.title = toolbarText
+//        val toolbarText = "Let's go $name"
+//        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
+//        toolbar.title = toolbarText
         return true
     }
 

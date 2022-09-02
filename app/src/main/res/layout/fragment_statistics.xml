@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/_0km"
-        android:textSize="@dimen/text_40"
+        android:textSize="@dimen/text_30"
         app:layout_constraintBottom_toTopOf="@+id/total_distance_info_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline_2" />
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/_00_00_00"
-        android:textSize="@dimen/text_40"
+        android:textSize="@dimen/text_30"
         app:layout_constraintBottom_toTopOf="@+id/total_time_info_text_view"
         app:layout_constraintEnd_toStartOf="@+id/guideline_2"
         app:layout_constraintStart_toStartOf="parent" />
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/_0kcal"
-        android:textSize="@dimen/text_40"
+        android:textSize="@dimen/text_30"
         app:layout_constraintBottom_toTopOf="@+id/total_calories_info_text_view"
         app:layout_constraintEnd_toStartOf="@+id/guideline_2"
         app:layout_constraintStart_toStartOf="parent" />
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/_0km_h"
-        android:textSize="@dimen/text_40"
+        android:textSize="@dimen/text_30"
         app:layout_constraintBottom_toTopOf="@+id/total_avg_speed_info_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline_2" />

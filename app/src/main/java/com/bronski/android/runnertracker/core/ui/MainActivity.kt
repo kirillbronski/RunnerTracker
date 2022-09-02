@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         navigateToTrackingFragmentIfNeeded(intent)
-        setSupportActionBar(binding.toolbar)
+        //setSupportActionBar(binding.toolbar)
         setupNavigation()
     }
 
