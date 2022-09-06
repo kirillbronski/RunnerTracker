@@ -1,3 +1,49 @@
 <resources>
-    <string name="app_name">Runner Tracker</string>
+    <string name="app_name" translatable="false">Runner Tracker</string>
+    <string name="calories">CALORIES</string>
+    <string name="avgspeed">AVGSPEED</string>
+    <string name="distance">DISTANCE</string>
+    <string name="time">TIME</string>
+    <string name="date">DATE</string>
+    <string name="running_tracker">Running Tracker</string>
+    <string name="welcome">Welcome!\nPlease enter your name and weight.</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_weight">Your Weight</string>
+    <string name="kg">kg</string>
+    <string name="continue_tv">Continue</string>
+    <string name="sort_by">Sort by:</string>
+    <string name="apply_changes">Apply Changes</string>
+    <string name="total_distance">Total Distance</string>
+    <string name="_0km">0km</string>
+    <string name="total_time">Total Time</string>
+    <string name="_00_00_00">00:00:00</string>
+    <string name="total_calories_burned">Total Calories Burned</string>
+    <string name="_0kcal">0kcal</string>
+    <string name="average_speed">Average Speed</string>
+    <string name="_0km_h">0km/h</string>
+    <string name="_00_00_00_00">00:00:00:00</string>
+    <string name="start">Start</string>
+    <string name="finish_run">Finish</string>
+    <string name="let_s_go_username">Let\'s go, USERNAME!</string>
+    <string name="request_permissions">You need to accept location permissions to use this app.</string>
+    <string name="permission_denied">Permission denied</string>
+    <string name="permission_denied_forever_message">"You have denied permissions forever. You can change your decision in the app settings.\n\nWould you like to open app settings?"</string>
+    <string name="requires_gps">This application requires GPS to work properly, do you want to enable it?</string>
+    <string name="start_text">Start</string>
+    <string name="stop_text">Stop</string>
+    <string name="run_fragment">Run</string>
+    <string name="setup_fragment">Setup</string>
+    <string name="statistic_fragment">Statistics</string>
+    <string name="tracking_fragment">Tracking</string>
+    <string name="settings_fragment">Settings</string>
+    <string name="your_runs">Your Runs</string>
+    <string name="statistics">Statistics</string>
+    <string name="settings">Settings</string>
+    <string-array name="filter_options">
+        <item>Date</item>
+        <item>Running Time</item>
+        <item>Distance</item>
+        <item>Average Speed</item>
+        <item>Calories Burned</item>
+    </string-array>
 </resources>

@@ -15,11 +15,13 @@ class App : Application() {
     private fun setupTimber() {
         Timber.plant(object : Timber.DebugTree() {
             override fun createStackElementTag(element: StackTraceElement): String? {
-                return String.format("%s: %s: %s",
+                return String.format(
+                    "%s: %s: %s",
                     element.fileName,
                     element.methodName,
                     element.lineNumber,
-                    super.createStackElementTag(element))
+                    super.createStackElementTag(element)
+                )
             }
 
             override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {

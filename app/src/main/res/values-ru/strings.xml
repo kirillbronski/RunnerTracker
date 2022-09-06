@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calories">Калории</string>
+    <string name="avgspeed">ср.Скорость</string>
+    <string name="distance">Дистанция</string>
+    <string name="time">Время</string>
+    <string name="date">Дата</string>
+    <string name="running_tracker">Running Tracker</string>
+    <string name="welcome">Добро пожаловать!\nПожалуйста укажите Ваше имя и вес</string>
+    <string name="your_name">Ваше имя</string>
+    <string name="your_weight">Ваш вес</string>
+    <string name="kg">кг</string>
+    <string name="continue_tv">Продолжить</string>
+    <string name="sort_by">Сортировать:</string>
+    <string name="apply_changes">Применить</string>
+    <string name="total_distance">Общая дистанция</string>
+    <string name="_0km"> км</string>
+    <string name="total_time">Общее время</string>
+    <string name="_00_00_00">00:00:00</string>
+    <string name="total_calories_burned">Всего каллорий сожжено</string>
+    <string name="_0kcal"> ккал</string>
+    <string name="average_speed">Средняя скорость</string>
+    <string name="_0km_h"> км/ч</string>
+    <string name="_00_00_00_00">00:00:00:00</string>
+    <string name="start">Старт</string>
+    <string name="finish_run">Финиш</string>
+    <string name="let_s_go_username">Let\'s go, USERNAME!</string>
+    <string name="request_permissions">You need to accept location permissions to use this app.</string>
+    <string name="permission_denied">Permission denied</string>
+    <string name="permission_denied_forever_message">"You have denied permissions forever. You can change your decision in the app settings.\n\nWould you like to open app settings?"</string>
+    <string name="requires_gps">This application requires GPS to work properly, do you want to enable it?</string>
+    <string name="start_text">Старт</string>
+    <string name="stop_text">Стоп</string>
+    <string name="run_fragment">Бег</string>
+    <string name="setup_fragment">Настройка</string>
+    <string name="statistic_fragment">Статистика</string>
+    <string name="tracking_fragment">Трекер</string>
+    <string name="settings_fragment">Настройки</string>
+    <string name="your_runs">Забеги</string>
+    <string name="statistics">Статистика</string>
+    <string name="settings">Настройки</string>
+    <string-array name="filter_options">
+        <item>Дата</item>
+        <item>Время</item>
+        <item>Дистанция</item>
+        <item>Средняя скорость</item>
+        <item>Калории</item>
+    </string-array>
+</resources>
