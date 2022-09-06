@@ -1,11 +1,11 @@
 package com.bronski.android.runnertracker.di.modules
 
 import com.bronski.android.runnertracker.core.data.room.RunDao
-import com.bronski.android.runnertracker.main.repository.ITrackingRepository
 import com.bronski.android.runnertracker.run.ui.repository.IRunRepository
 import com.bronski.android.runnertracker.run.ui.repository.RunRepositoryImpl
 import com.bronski.android.runnertracker.statistics.repository.IStatisticsRepository
 import com.bronski.android.runnertracker.statistics.repository.StatisticsRepositoryImpl
+import com.bronski.android.runnertracker.tracking.repository.ITrackingRepository
 import com.bronski.android.runnertracker.tracking.repository.TrackingRepositoryImpl
 import dagger.Module
 import dagger.Provides

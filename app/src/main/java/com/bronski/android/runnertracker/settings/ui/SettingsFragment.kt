@@ -3,9 +3,6 @@ package com.bronski.android.runnertracker.settings.ui
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.viewModels
-import com.bronski.android.runnertracker.R
 import com.bronski.android.runnertracker.core.ui.BaseFragment
 import com.bronski.android.runnertracker.core.utils.Constants.KEY_NAME
 import com.bronski.android.runnertracker.core.utils.Constants.KEY_WEIGHT
@@ -19,8 +16,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
-
-    private val viewModel by viewModels<SettingsViewModel>()
 
     override fun getViewBinding() = FragmentSettingsBinding.inflate(layoutInflater)
 
@@ -53,9 +48,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
             .putString(KEY_NAME, name)
             .putFloat(KEY_WEIGHT, weight.toFloat())
             .apply()
-//        val toolbarText = "Let's go $name"
-//        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
-//        toolbar.title = toolbarText
         return true
     }
 

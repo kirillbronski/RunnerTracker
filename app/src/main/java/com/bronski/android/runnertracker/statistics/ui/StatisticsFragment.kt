@@ -1,5 +1,6 @@
 package com.bronski.android.runnertracker.statistics.ui
 
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -31,18 +32,22 @@ class StatisticsFragment : BaseFragment<FragmentStatisticsBinding>() {
     }
 
     private fun setupBarChart() {
+
         binding.barChart.xAxis.apply {
             position = XAxis.XAxisPosition.BOTTOM
             setDrawLabels(false)
-
             setDrawGridLines(false)
         }
         binding.barChart.axisLeft.apply {
-
+            if (isDarkThemeEnabled()) {
+                textColor = Color.WHITE
+            }
             setDrawGridLines(false)
         }
         binding.barChart.axisRight.apply {
-
+            if (isDarkThemeEnabled()) {
+                textColor = Color.WHITE
+            }
             setDrawGridLines(false)
         }
         binding.barChart.apply {
@@ -64,7 +69,7 @@ class StatisticsFragment : BaseFragment<FragmentStatisticsBinding>() {
             it?.let {
                 val km = it / 1000f
                 val totalDistance = round(km * 10f) / 10f
-                val totalDistanceString = "${totalDistance}km"
+                val totalDistanceString = "$totalDistance" + requireContext().getString(R.string._0km)
                 binding.totalDistanceTextView.text = totalDistanceString
             }
         }
@@ -72,14 +77,14 @@ class StatisticsFragment : BaseFragment<FragmentStatisticsBinding>() {
         viewModel.totalAverageSpeed.observe(viewLifecycleOwner) {
             it?.let {
                 val avgSpeed = round(it * 10f) / 10f
-                val avgSpeedString = "${avgSpeed}km/h"
+                val avgSpeedString = "$avgSpeed" + requireContext().getString(R.string._0km_h)
                 binding.averageSpeedTextView.text = avgSpeedString
             }
         }
 
         viewModel.totalCaloriesBurned.observe(viewLifecycleOwner) {
             it?.let {
-                val totalCalories = "${it}kcal"
+                val totalCalories = "$it" + requireContext().getString(R.string._0kcal)
                 binding.totalCaloriesTextView?.text = totalCalories
             }
         }
@@ -98,5 +103,16 @@ class StatisticsFragment : BaseFragment<FragmentStatisticsBinding>() {
                 binding.barChart.invalidate()
             }
         }
+    }
+
+    private fun isDarkThemeEnabled(): Boolean {
+        val themeApp = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_YES
+        var isEnabled = false
+        when (themeApp) {
+            Configuration.UI_MODE_NIGHT_YES -> {
+                isEnabled = true
+            }
+        }
+        return isEnabled
     }
 }

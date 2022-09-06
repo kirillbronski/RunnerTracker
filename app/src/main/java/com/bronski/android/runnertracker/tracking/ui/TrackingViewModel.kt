@@ -3,7 +3,7 @@ package com.bronski.android.runnertracker.tracking.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bronski.android.runnertracker.core.data.room.RunEntity
-import com.bronski.android.runnertracker.main.repository.ITrackingRepository
+import com.bronski.android.runnertracker.tracking.repository.ITrackingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

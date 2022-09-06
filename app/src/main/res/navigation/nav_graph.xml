@@ -12,7 +12,7 @@
     <fragment
         android:id="@+id/runFragment"
         android:name="com.bronski.android.runnertracker.run.ui.RunFragment"
-        android:label="Run">
+        android:label="@string/run_fragment">
         <action
             android:id="@+id/action_runFragment_to_trackingFragment"
             app:destination="@id/trackingFragment" />
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/setupFragment"
         android:name="com.bronski.android.runnertracker.setup.ui.SetupFragment"
-        android:label="Setup">
+        android:label="@string/setup_fragment">
         <action
             android:id="@+id/action_setupFragment_to_runFragment"
             app:destination="@id/runFragment" />
@@ -28,11 +28,11 @@
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.bronski.android.runnertracker.statistics.ui.StatisticsFragment"
-        android:label="Statistics" />
+        android:label="@string/statistic_fragment" />
     <fragment
         android:id="@+id/trackingFragment"
         android:name="com.bronski.android.runnertracker.tracking.ui.TrackingFragment"
-        android:label="Tracking">
+        android:label="@string/tracking_fragment">
         <action
             android:id="@+id/action_trackingFragment_to_runFragment"
             app:destination="@id/runFragment" />
@@ -40,5 +40,5 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.bronski.android.runnertracker.settings.ui.SettingsFragment"
-        android:label="Settings" />
+        android:label="@string/settings_fragment" />
 </navigation>

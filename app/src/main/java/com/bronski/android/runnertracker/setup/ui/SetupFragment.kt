@@ -3,8 +3,6 @@ package com.bronski.android.runnertracker.setup.ui
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.bronski.android.runnertracker.R
@@ -25,8 +23,6 @@ class SetupFragment : BaseFragment<FragmentSetupBinding>() {
 
     @set:Inject
     var isFirstAppOpen = true
-
-    private val viewModel by viewModels<SetupViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,9 +57,6 @@ class SetupFragment : BaseFragment<FragmentSetupBinding>() {
             .putFloat(KEY_WEIGHT, weight.toFloat())
             .putBoolean(KEY_FIRST_TIME_TOGGLE, false)
             .apply()
-//        val toolbarText = "Let's go $name"
-//        val toolbar = requireActivity().findViewById<Toolbar>(R.id.toolbar)
-//        toolbar.title = toolbarText
         return true
     }
 

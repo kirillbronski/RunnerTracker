@@ -14,7 +14,7 @@ import java.util.*
 
 @SuppressLint("ViewConstructor")
 class CustomMarkerView(
-    val runs: List<RunEntity>,
+    private val runs: List<RunEntity>,
     context: Context,
     layoutId: Int,
 ) : MarkerView(context, layoutId) {
@@ -38,13 +38,15 @@ class CustomMarkerView(
         }
         val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.ROOT)
 
-        findViewById<MaterialTextView>(R.id.date_text_view).text = dateFormat.format(calendar.time)
+        findViewById<MaterialTextView>(R.id.date_text_view).text =
+            dateFormat.format(calendar.time)
         findViewById<MaterialTextView>(R.id.average_speed_text_view).text =
             "${run.averageSpeedInKmh}km/h"
         findViewById<MaterialTextView>(R.id.distance_text_view).text =
             "${run.distanceInMeters / 1000f}km"
         findViewById<MaterialTextView>(R.id.duration_text_view).text =
             TrackingUtility.getFormattedStopWatchTime(run.timeInMillis)
-        findViewById<MaterialTextView>(R.id.calories_text_view).text = "${run.caloriesBurned}kcal"
+        findViewById<MaterialTextView>(R.id.calories_text_view).text =
+            "${run.caloriesBurned}kcal"
     }
 }

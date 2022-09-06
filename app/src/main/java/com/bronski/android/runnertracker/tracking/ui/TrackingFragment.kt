@@ -31,7 +31,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -57,9 +56,10 @@ class TrackingFragment : BaseFragment<FragmentTrackingBinding>() {
         super.onViewCreated(view, savedInstanceState)
         setupOptionsMenu()
         binding.mapView.onCreate(savedInstanceState)
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             val cancelTrackingDialog = parentFragmentManager.findFragmentByTag(
-                CANCEL_TRACKING_DIALOG_TAG) as CancelTrackingDialog?
+                CANCEL_TRACKING_DIALOG_TAG
+            ) as CancelTrackingDialog?
             cancelTrackingDialog?.setYesListener {
                 stopRun()
             }
@@ -179,7 +179,7 @@ class TrackingFragment : BaseFragment<FragmentTrackingBinding>() {
         if (!isTracking && currentTimeInMillis > 0L) {
             binding.runButton.text = getString(R.string.start_text)
             binding.finishButton.visibility = View.VISIBLE
-        } else if(isTracking) {
+        } else if (isTracking) {
             binding.runButton.text = getString(R.string.stop_text)
             toolbarMenu?.getItem(0)?.isVisible = true
             binding.finishButton.visibility = View.GONE

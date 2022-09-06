@@ -44,7 +44,6 @@
         android:layout_marginEnd="@dimen/margin_32"
         android:layout_marginBottom="@dimen/margin_32"
         android:src="@drawable/ic_add_24"
-        app:backgroundTint="@color/color_accent"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
